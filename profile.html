@@ -20,23 +20,68 @@
         </div>
         
         <!-- PROFILE -->
-        <div class="mainbar">
-        <h2>Profile</h2>
-            <input id="name" value="SUDHARSUN A" disabled>
-            <input id="email" value="sudharsun@lms.ac.in" disabled>
-            <input id="dept" value="Artificial Intellegence and Data Science" disabled>
-            <button  id="editProfile">Edit Profile</button>
+         <div class="mainbar">
+            <center class="profile-box">
+                <h2>Welcome SUDHARSUN</h2>
+                <div class="profile-card">
+                    <h2>Profile</h2>
+
+                    <div class="field">
+                        <label>Name</label>
+                        <input id="name" value="SUDHARSUN A" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input id="email" value="sudharsun@lms.ac.in" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>Department</label>
+                        <input id="dept" value="Artificial Intelligence and Data Science" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>Attendence Percentage</label>
+                        <input id="attend" value="94%" disabled>
+                    </div>
+
+                    <button id="editProfile">Edit Profile</button>
+                </div>
+            </center>
         </div>
     </div>
     <script>
-        /* ========== PROFILE EDIT ========== */
+        /* ========= ALERT ========= */
+        function showAlert(message) {
+            const alert = document.createElement("div");
+            alert.className = "alert";
+            alert.innerText = message;
+            document.body.appendChild(alert);
+
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        /* ========= PROFILE EDIT ========= */
+        const editBtn = document.getElementById("editProfile");
+        const inputs = document.querySelectorAll(".profile-card input");
+        const card = document.querySelector(".profile-card");
+
         let editing = false;
-        editProfile.onclick = () => {
-        editing = !editing;
-        name.disabled = email.disabled = !editing;
-        editProfile.textContent = editing ? "Save" : "Edit Profile";
-        if (!editing) showAlert("Profile Updated");
-        };
+
+        editBtn.addEventListener("click", () => {
+            editing = !editing;
+
+            inputs.forEach(input => input.disabled = !editing);
+            editBtn.innerText = editing ? "Save Changes" : "Edit Profile";
+
+            card.classList.toggle("editing", editing);
+
+            if (!editing) {
+                showAlert("Profile Updated Successfully ✅");
+            }
+        });
     </script>
+
 </body>
 </html>
