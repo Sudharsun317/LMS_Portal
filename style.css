@@ -7,17 +7,33 @@
 body {
     
     margin: 0;
-    background:rgba(54, 169, 236, 0.411)}
+    background:rgba(53, 174, 243, 0.788)}
 
-.login 
-{
-  max-width: 400px;
-  margin: 100px auto;
-  background: rgba(47, 145, 236, 0.589);
-  padding: 50px;
-  border-radius: 10px;
+.login {
+  animation: fadeIn 0.6s ease;
 }
-body.dark .login 
+
+.login.shake {
+  animation: shake 0.3s;
+}
+
+.app {
+    display: none;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+body.dark 
 { background: #409bf5c2; }
 
 .login input, button 
@@ -28,6 +44,13 @@ body.dark .login
   border-radius: 10px;
 }
 
+.login{
+    display: grid;
+}
+
+.input{
+    max-width: 200px;
+}
 .error {
      color: red; font-size: 14px; }
 
@@ -38,7 +61,7 @@ body.dark .login
 header {
     min-height: 50px;
     text-align: center;
-    background-color: #1c62f8;
+    background: #1e65ff;
 }
 
 .sidebar {
@@ -50,6 +73,21 @@ header {
   height: 100%;
   transform: translateX(0);
 }
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: rgba(255,255,255,0.2);
+  padding-left: 18px;
+}
+
 
 .sidebar a {
   display: block;
@@ -70,13 +108,39 @@ header {
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 15px;
+  gap: 20px;
 }
 
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 6px;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.6s ease forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.card:active {
+  transform: scale(0.95);
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 button{
@@ -105,4 +169,278 @@ button{
   color: white;
   padding: 10px 15px;
   border-radius: 5px;
+}
+
+.assignment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.assignment-card {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards;
+}
+
+.assignment-card:hover {
+    transform: scale(1.02);
+}
+
+.status {
+    font-weight: bold;
+}
+
+.pending { color: orange; }
+.submitted { color: green; }
+.late { color: red; }
+
+.assignment-card button {
+    padding: 6px 12px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.assignment-card button:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alert */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #16a34a;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    cursor: pointer;
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease forwards;
+}
+
+.course-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.course-card h3 {
+    margin: 0 0 10px;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.green {
+    background: #16a34a;
+    color: white;
+}
+
+.gray {
+    background: #6b7280;
+    color: white;
+}
+
+.progress {
+    background: #e5e7eb;
+    border-radius: 6px;
+    height: 8px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #2563eb;
+}
+
+.course-card button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: #2563eb;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.course-card button:hover {
+    background: #1d4ed8;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-card {
+    background: rgba(234, 240, 245, 0.747);
+    padding: 25px;
+    max-width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    animation: fadeIn 0.6s ease;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.field input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.field input:disabled {
+    background: #f3f4f6;
+    border: none;
+}
+
+.profile-card button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.profile-card button:hover {
+    background: #1d4ed8;
+}
+
+.profile-card.editing {
+    outline: 3px dashed #2563eb;
+}
+
+/* Alert */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #16a34a;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Full page center */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b9e3f7; /* same as your screenshot */
+}
+
+/* Login box */
+.login-box {
+    background: white;
+    padding: 30px 35px;
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+
+    animation: fadeIn 0.6s ease;
+}
+
+/* Inputs */
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Button */
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background: #5fae87;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background: #4b9a73;
+}
+
+/* Error text */
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
