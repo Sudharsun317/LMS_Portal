@@ -11,13 +11,17 @@
 <body>
 
 <!-- ================= LOGIN ================= -->
-<div class="login" id="loginBox">
-  <h2>LMS Login</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p class="error" id="loginError"></p>
-</div>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <h2>LMS Login</h2>
+
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+
+            <button id="loginBtn">Login</button>
+            <p class="error" id="loginError"></p>
+        </div>
+    </div>
 
 
 <!-- ================= APP ================= -->
@@ -36,25 +40,73 @@
         </div>
     </div>
 </div>
-<script type="module" src="script.js"></script>
-    <script>
-        /* ========== DASHBOARD DATA ========== */
-        const stats = [
+<script>
+/* ========= LOGIN LOGIC ========= */
+const loginBtn = document.getElementById("loginBtn");
+const loginError = document.getElementById("loginError");
+const loginWrapper = document.querySelector(".login-wrapper");
+const app = document.getElementById("app");
+
+loginBtn.addEventListener("click", () => {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!username || !password) {
+        loginError.innerText = "Please enter username and password";
+        return;
+    }
+
+    // Success
+    loginError.innerText = "";
+    loginWrapper.style.display = "none";
+    app.style.display = "block";
+
+    loadDashboard();
+});
+
+/* ========= DASHBOARD DATA ========= */
+function loadDashboard() {
+    const stats = [
         { label: "Courses", value: 5 },
         { label: "Assignments", value: 3 },
-        { label: "Attendance", value: "94%" },
+        { label: "Attendance", value: 94, suffix: "%" },
         { label: "GPA", value: 8.7 }
-        ];
+    ];
 
-        stats.forEach(s => {
-        dashboardCards.innerHTML += `
-            <div class="card">
-            <h3>${s.value}</h3>
-            <p>${s.label}</p>
-            </div>`;
-        });
+    const dashboardCards = document.getElementById("dashboardCards");
+    dashboardCards.innerHTML = "";
 
-    </script>
+    stats.forEach(stat => {
+        const card = document.createElement("div");
+        card.className = "card interactive";
+
+        card.innerHTML = `
+            <h3>0</h3>
+            <p>${stat.label}</p>
+        `;
+
+        dashboardCards.appendChild(card);
+        animateCount(card.querySelector("h3"), stat.value, stat.suffix || "");
+    });
+}
+
+/* ========= COUNTER ANIMATION ========= */
+function animateCount(element, target, suffix) {
+    let count = 0;
+    const speed = target / 40;
+
+    const interval = setInterval(() => {
+        count += speed;
+        if (count >= target) {
+            element.innerText = target + suffix;
+            clearInterval(interval);
+        } else {
+            element.innerText = Math.floor(count) + suffix;
+        }
+    }, 30);
+}
+</script>
+
 
 
 </body>
