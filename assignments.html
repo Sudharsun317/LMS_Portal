@@ -23,30 +23,79 @@
         <div class="mainbar">
             <!-- ASSIGNMENTS -->
             <h2>Assignments</h2>
-            <div id="assignments"></div>
+            <div id="assignments" class="assignment-list"></div>
         </div>
     </div>
+    
     <script>
-        /* ========== ASSIGNMENTS ========== */
+        /* ========= ALERT SYSTEM ========= */
+        function showAlert(message) {
+            const alert = document.createElement("div");
+            alert.className = "alert";
+            alert.innerText = message;
+
+            document.body.appendChild(alert);
+
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        /* ========= ASSIGNMENT DATA ========= */
         const assignmentData = [
-        { title: "Java Script Assignment", due: "2026-04-10", status: "Pending" }
+            { title: "C Programming", due: "2026-04-10", status: "Submitted" },
+            { title: "HTML & CSS", due: "2026-04-10", status: "Submitted" },
+            { title: "Git & GitHub", due: "2026-04-10", status: "Submitted" },
+            { title: "JavaScript", due: "2026-04-01", status: "Pending" }
         ];
 
-        assignmentData.forEach((a, i) => {
-        assignments.innerHTML += `
-            <p>
-            ${a.title}
-            <span class="${a.status.toLowerCase()}">${a.status}</span>
-            <button onclick="submitAssignment(${i})">Submit</button>
-            </p>`;
+        const assignmentsDiv = document.getElementById("assignments");
+        const today = new Date();
+
+        /* ========= RENDER ASSIGNMENTS ========= */
+        assignmentData.forEach((a, index) => {
+
+            const dueDate = new Date(a.due);
+
+            // Late logic
+            if (today > dueDate && a.status === "Pending") {
+                a.status = "Late";
+            }
+
+            const card = document.createElement("div");
+            card.className = "assignment-card";
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            card.innerHTML = `
+                <div>
+                    <h4>${a.title}</h4>
+                    <p>Due: ${a.due}</p>
+                </div>
+
+                <div>
+                    <p class="status ${a.status.toLowerCase()}">${a.status}</p>
+                    <button 
+                        ${a.status !== "Pending" ? "disabled" : ""} 
+                        onclick="submitAssignment(${index})">
+                        Submit
+                    </button>
+                </div>
+            `;
+
+            assignmentsDiv.appendChild(card);
         });
 
-        window.submitAssignment = i => {
-        assignmentData[i].status = "Submitted";
-        showAlert("Assignment Submitted");
-        location.reload();
-        };
+        /* ========= SUBMIT ASSIGNMENT ========= */
+        function submitAssignment(index) {
+            assignmentData[index].status = "Submitted";
+            showAlert("Assignment Submitted Successfully ✅");
+            assignmentsDiv.innerHTML = "";
+            assignmentData.forEach((_, i) => renderAgain(i));
+        }
 
+        /* ========= RERENDER ========= */
+        function renderAgain() {
+            location.reload(); // simple UI refresh
+        }
     </script>
+
 </body>
 </html>
