@@ -23,23 +23,52 @@
         <div class="mainbar">
             <!-- COURSES -->
             <h2>Courses</h2>
-            <div id="courses"></div>
+            <div id="courses" class="course-list"></div>       
         </div>
     </div>
     <script>
-        /* ========== COURSES ========== */
+        /* ========= COURSE DATA ========= */
         const courseData = [
-        { name: "Web Development", status: "Active" },
-        { name: "Data Structures", status: "Completed" }
+            { name: "JavaScript", status: "Active", progress: 65 },
+            { name: "HTML & CSS", status: "Completed", progress: 100 },
+            { name: "C Programming", status: "Completed", progress: 100 },
+            { name: "Git & GitHub", status: "Completed", progress: 100 }
         ];
 
-        courseData.forEach(c => {
-        courses.innerHTML += `
-            <p>${c.name}
-            <span class="badge ${c.status === "Active" ? "green" : "gray"}">
-            ${c.status}
-            </span></p>`;
+        const coursesDiv = document.getElementById("courses");
+
+        /* ========= RENDER COURSES ========= */
+        courseData.forEach((course, index) => {
+            const card = document.createElement("div");
+            card.className = "course-card";
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            card.innerHTML = `
+                <h3>${course.name}</h3>
+
+                <span class="badge ${course.status === "Active" ? "green" : "gray"}">
+                    ${course.status}
+                </span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width:${course.progress}%"></div>
+                </div>
+
+                <p>Progress: ${course.progress}%</p>
+
+                <button onclick="viewCourse('${course.name}')">
+                    View Course
+                </button>
+            `;
+
+            coursesDiv.appendChild(card);
         });
+
+        /* ========= VIEW COURSE ========= */
+        function viewCourse(courseName) {
+            alert(`Opening ${courseName} course (UI only)`);
+        }
     </script>
+
 </body>
 </html>
