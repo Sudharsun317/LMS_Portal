@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>LMS PORTAL</h1>
+    </header>
+    <div class="bars">
+        <div class="sidebar">
+            
+            <a href="dashboard.html" class="nav active">Dashboard</a>
+            <a href="courses.html" class="nav">Courses</a>
+            <a href="assignments.html" class="nav">Assignments</a>
+            <a href="profile.html" class="nav">Profile</a>
+        </div>
+        
+        <!-- PROFILE -->
+        <div class="mainbar">
+        <h2>Profile</h2>
+            <input id="name" value="SUDHARSUN A" disabled>
+            <input id="email" value="sudharsun@lms.ac.in" disabled>
+            <input id="dept" value="Artificial Intellegence and Data Science" disabled>
+            <button  id="editProfile">Edit Profile</button>
+        </div>
+    </div>
+    <script>
+        /* ========== PROFILE EDIT ========== */
+        let editing = false;
+        editProfile.onclick = () => {
+        editing = !editing;
+        name.disabled = email.disabled = !editing;
+        editProfile.textContent = editing ? "Save" : "Edit Profile";
+        if (!editing) showAlert("Profile Updated");
+        };
+    </script>
+</body>
+</html>

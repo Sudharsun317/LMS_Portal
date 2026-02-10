@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>LMS PORTAL</h1>
+    </header>
+    <div class="bars"></div>
+        <div class="sidebar">
+            
+            <a href="dashboard.html" class="nav active">Dashboard</a>
+            <a href="courses.html" class="nav">Courses</a>
+            <a href="assignments.html" class="nav">Assignments</a>
+            <a href="profile.html" class="nav">Profile</a>
+        </div>
+
+        <div class="mainbar">
+
+            <!-- DASHBOARD -->
+            <h2>Dashboard</h2>
+            <div class="cards" id="dashboardCards"></div>
+        </div>
+
+    <script>
+        /* ========== DASHBOARD DATA ========== */
+        const stats = [
+        { label: "Courses", value: 5 },
+        { label: "Assignments", value: 3 },
+        { label: "Attendance", value: "94%" },
+        { label: "GPA", value: 8.7 }
+        ];
+
+        stats.forEach(s => {
+        dashboardCards.innerHTML += `
+            <div class="card">
+            <h3>${s.value}</h3>
+            <p>${s.label}</p>
+            </div>`;
+        });
+
+    </script>
+</body>
+</html>

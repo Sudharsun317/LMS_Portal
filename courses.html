@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Courses</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <h1>LMS PORTAL</h1>
+    </header>
+    <div class="bars">
+        <div class="sidebar">
+            
+            <a href="dashboard.html" class="nav active">Dashboard</a>
+            <a href="courses.html" class="nav">Courses</a>
+            <a href="assignments.html" class="nav">Assignments</a>
+            <a href="profile.html" class="nav">Profile</a>
+        </div>
+        
+        <div class="mainbar">
+            <!-- COURSES -->
+            <h2>Courses</h2>
+            <div id="courses"></div>
+        </div>
+    </div>
+    <script>
+        /* ========== COURSES ========== */
+        const courseData = [
+        { name: "Web Development", status: "Active" },
+        { name: "Data Structures", status: "Completed" }
+        ];
+
+        courseData.forEach(c => {
+        courses.innerHTML += `
+            <p>${c.name}
+            <span class="badge ${c.status === "Active" ? "green" : "gray"}">
+            ${c.status}
+            </span></p>`;
+        });
+    </script>
+</body>
+</html>

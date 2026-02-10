@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Assignments</title>    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <h1>LMS PORTAL</h1>
+    </header>
+    <div class="bars">
+        <div class="sidebar">
+            
+            <a href="dashboard.html" class="nav active">Dashboard</a>
+            <a href="courses.html" class="nav">Courses</a>
+            <a href="assignments.html" class="nav">Assignments</a>
+            <a href="profile.html" class="nav">Profile</a>
+        </div>
+        
+        <div class="mainbar">
+            <!-- ASSIGNMENTS -->
+            <h2>Assignments</h2>
+            <div id="assignments"></div>
+        </div>
+    </div>
+    <script>
+        /* ========== ASSIGNMENTS ========== */
+        const assignmentData = [
+        { title: "Java Script Assignment", due: "2026-04-10", status: "Pending" }
+        ];
+
+        assignmentData.forEach((a, i) => {
+        assignments.innerHTML += `
+            <p>
+            ${a.title}
+            <span class="${a.status.toLowerCase()}">${a.status}</span>
+            <button onclick="submitAssignment(${i})">Submit</button>
+            </p>`;
+        });
+
+        window.submitAssignment = i => {
+        assignmentData[i].status = "Submitted";
+        showAlert("Assignment Submitted");
+        location.reload();
+        };
+
+    </script>
+</body>
+</html>

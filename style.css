@@ -1,0 +1,108 @@
+
+* {
+     box-sizing: border-box; 
+     font-family: Arial, sans-serif; }
+
+
+body {
+    
+    margin: 0;
+    background:rgba(54, 169, 236, 0.411)}
+
+.login 
+{
+  max-width: 400px;
+  margin: 100px auto;
+  background: rgba(47, 145, 236, 0.589);
+  padding: 50px;
+  border-radius: 10px;
+}
+body.dark .login 
+{ background: #409bf5c2; }
+
+.login input, button 
+{
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.error {
+     color: red; font-size: 14px; }
+
+
+.app {
+     display: none; }
+
+header {
+    min-height: 50px;
+    text-align: center;
+    background-color: #1c62f8;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1e65ff;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  height: 100%;
+  transform: translateX(0);
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  margin: 15px 0;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+     font-weight: bold; }
+
+.mainbar {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+button{
+    background-color: rgba(0, 128, 0, 0.493);
+    max-width: 500px;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.green { background: green; color: white; }
+.gray { background: gray; color: white; }
+
+.pending { color: orange; }
+.submitted { color: green; }
+.late { color: red; }
+
+
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2563eb;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
