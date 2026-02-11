@@ -10,8 +10,7 @@
 body {
     
     margin: 0;
-    background:rgba(53, 174, 243, 0.788)}
-
+     background: linear-gradient(135deg, #4e73df, #1cc88a);
 .login {
   animation: fadeIn 0.6s ease;
 }
@@ -447,5 +446,6 @@ button{
         transform: translateY(0);
     }
 }
+
 
 
